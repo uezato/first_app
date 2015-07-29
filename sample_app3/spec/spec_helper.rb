@@ -138,4 +138,15 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+end
+
+def full_title(page_title)
+  #print("full_title is called\n")
+  base_title = "Ruby on Rails Tutorial Sample App"
+  if page_title.empty?
+    base_title
+  else
+    "#{base_title} | #{page_title}"
+  end
 end

@@ -10,4 +10,8 @@ class StaticPagesController < ApplicationController
   def about
 	  print("[DBG]about is called\n");
   end
+
+  def contact
+	  print("[DBG]contact is called\n");
+  end
 end
