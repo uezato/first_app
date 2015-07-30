@@ -23,6 +23,22 @@ feature "Home page" do
   it { should have_content('Sample App') }
   it { should have_title(full_title('')) }
   it { should_not have_title('| Home') }
+  it "should have the right links on the layout" do
+    #visit root_path
+    click_link "About"
+    expect(page).to have_title(full_title('About Us'))
+    click_link "Help"
+    #expect(page).to # ここにコードを記入
+    click_link "Contact"
+    #expect(page).to # ここにコードを記入
+    click_link "Home"
+    click_link "Sign up now!"
+    #expect(page).to # ここにコードを記入
+    click_link "sample app"
+    #expect(page).to # ここにコードを記入
+  end
+
+  #it_should_behave_like "all static pages"
 end
 
 feature "Help page" do
