@@ -46,18 +46,14 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'guard-rspec'
+  gem 'rspec-rails'
+  gem 'spork-rails'
+  gem 'factory_girl_rails', '4.2.1'
 end
 
 # 追加（HerokuデプロイでWARNINGがでるから）
 #ruby '2.2.0'
 ruby '2.0.0'
-
-# gem 'sqlite3'
-group :development, :test do
-  #gem 'sqlite3'
-  gem 'rspec-rails'
-  gem 'spork-rails'
-end
 
 # 追加
 group :production do

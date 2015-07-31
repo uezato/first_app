@@ -41,13 +41,33 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "when email address is already taken" do
+  describe "when email address is already taken(upcase)" do
     before do
       user_with_same_email = @user.dup
       user_with_same_email.email = @user.email.upcase
       user_with_same_email.save
     end
     it { should_not be_valid }
+  end
+
+  describe "when email address is already taken(downcase)" do
+    before do
+      user_with_same_email = @user.dup
+      user_with_same_email.email = @user.email.downcase
+      user_with_same_email.save
+    end
+    it { should_not be_valid }
+  end
+
+  #not work , TBD
+  describe "when email address is invalid" do
+    before do
+      user_with_same_email = @user.dup
+      user_with_same_email.email = "foo@bar..com" 
+      user_with_same_email.save
+    end
+    #it { should_not be_valid }
+    #it { should_not be_valid }
   end
 
   describe "when password is not present" do
@@ -110,4 +130,14 @@ RSpec.describe User, type: :model do
     end
   end
 end
+
+  describe "profile page" do
+    # ユーザー変数を作成するためのコードに置き換える。
+    let(:user) { FactoryGirl.create(:user) }
+    before { visit user_path(user) }
+
+    it { should have_content(user.name) }
+    it { should have_title(user.name) }
+  end
+
 end
