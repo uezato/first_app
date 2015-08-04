@@ -15,6 +15,20 @@ RSpec.describe User, type: :model do
 
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:admin) }
+
+  it { should be_valid }
+  it { should_not be_admin }
+
+  describe "with admin attribute set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:admin)
+    end
+
+    it { should be_admin }
+  end
+
   it "should respond to 'name'" do
     expect(@user).to respond_to(:name)
   end
@@ -32,9 +46,9 @@ RSpec.describe User, type: :model do
         expect(@user).not_to be_valid
       end
     end
- end
+  end
 
- describe "when email format is valid" do
+  describe "when email format is valid" do
     it "should be valid" do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       addresses.each do |valid_address|
@@ -137,7 +151,7 @@ end
   describe "profile page" do
     # ユーザー変数を作成するためのコードに置き換える。
     let(:user) { FactoryGirl.create(:user) }
-    before { visit user_path(user) }
+    before { visit users_path(user) }
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
